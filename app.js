@@ -2,13 +2,21 @@ const express = require("express");
 const morgan = require("morgan");
 const createErrors = require("http-errors");
 const env = require("dotenv");
-
+require("./helpers/db");
 env.config();
+
+// Import routes
+const AuthRoute = require("./routes/auth.route");
 const app = express();
 
+// use middleware
+app.use(morgan("dev"));
 app.get("/", async (req, res, next) => {
   res.send("Hello from express");
 });
+
+// use routes jere
+app.use("/auth", AuthRoute);
 
 // Not found error handler
 app.use(async (req, res, next) => {
