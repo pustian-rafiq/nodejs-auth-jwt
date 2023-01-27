@@ -11,6 +11,8 @@ const app = express();
 
 // use middleware
 app.use(morgan("dev"));
+app.use(express.json());
+
 app.get("/", async (req, res, next) => {
   res.send("Hello from express");
 });
